@@ -35,6 +35,14 @@ finally:
                 try:
                     WebDriverWait(driver, 60).until(ec.presence_of_element_located((By.CLASS_NAME, 'continue-button')))
                 finally:
+                    cratePrizesDiv = driver.find_elements_by_id('crate-prizes')
+                    cratePrizes = cratePrizesDiv[0].find_elements_by_class_name('crate-prize')
+                    index = [i for i in range(0, len(cratePrizes))
+                             if cratePrizes[i].get_attribute('class').__contains__('is-faded-out') is False][0]
+
+                    with open('prizeList.txt', 'a') as f:
+                        f.write(cratePrizes[index].text + '\n')
                     continueButton = driver.find_element_by_class_name('continue-button')
                     continueButton.click()
                     sleep(1)
+
