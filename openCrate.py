@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as ec
 
 from time import sleep
 import os
-path = os.path.dirname(os.path.abspath('main.py'))
+path = os.path.dirname(os.path.abspath('openCrate.py'))
 
 driver = webdriver.Chrome(str(path) + '\\chromedriver.exe')
 driver.get("https://www.sliver.tv")
@@ -42,6 +42,7 @@ finally:
 
                     with open('prizeList.txt', 'a') as f:
                         f.write(cratePrizes[index].text + '\n')
+                    print(cratePrizes[index].text)
                     continueButton = driver.find_element_by_class_name('continue-button')
                     continueButton.click()
                     sleep(1)
